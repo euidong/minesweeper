@@ -35,6 +35,9 @@ class App(tk.Frame):
                         relief=tk.SUNKEN, bd=BORDER_SIZE)
         head.grid(row=0, column=0, columnspan=width,
                   pady=(0, OUTTER_PADDING_SIZE), sticky='ew')
+        # button 의 경우 width와 height를 지정할 때, 담을 수 있는 text의 수를 기준으로 크기가 정해진다.
+        # 따라서, pixel단위로 크기를 지정하고 싶다면, frame으로 한 번 감싸주는 것이 좋다.
+        # 하지만, 굳이 이를 따를 필요는 없다.
         start_wrapper = tk.Frame(head, width=BTN_WIDTH, height=BTN_HEIGHT)
         start_wrapper.pack_propagate(0)
         start_wrapper.pack(padx=OUTTER_PADDING_SIZE, pady=OUTTER_PADDING_SIZE)
@@ -62,6 +65,7 @@ class App(tk.Frame):
 
                 btn = tk.Button(
                     btn_wrapper, bg=BACKGROUND_COLOR, bd=BORDER_SIZE)
+                # 버튼을 생성할 때, 위치 값(y, x)에 따른 호출 함수를 다르게 지정해서 서로 다른 행동을 하도록 쉽게 구현할 수 있다.
                 btn.bind("<ButtonRelease-1>", lambda e,
                          y=row, x=col: onLeftClick(y, x))
                 btn.bind("<ButtonRelease-3>", lambda e,
